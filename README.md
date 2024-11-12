@@ -8,11 +8,15 @@ Funny experiment!
 
 Keep it small initially and make it open source. People must be able to self-host this on githuq via a simple link providing their own credentials and then boom they have a github bot that can make them money.
 
-TODO: This is exciting to look forward to, but let's not get carried away - I don't know yet if this is at all something people'd want, but could be great to experiment with this UX.
-
 # Changelog
 
-## nov '13 2024
+## Nov '13 2024
 
 - came up with concept, landingpage and name
 - bought [domain](https://lilissues.com) and created [github account](https://github.com/lil-issues)
+
+# Todo
+
+This is exciting to look forward to, but let's not get carried away - I don't know yet if this is at all something people'd want, but could be great to experiment with this UX instead of with uithub directly.
+
+Implementation won't take longer than a few hours so let's do it; for fun! But keep it real simple.
