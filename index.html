@@ -99,22 +99,47 @@
         });
 
         // Handle form submission
-        document.getElementById('issueForm').addEventListener('submit', (e) => {
+        document.getElementById('issueForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const url = document.getElementById('issueUrl').value;
 
-            // Animate the form away
-            gsap.to("#issueForm", {
+            // Animate the form
+            gsap.to('#issueForm', {
                 duration: 0.5,
-                opacity: 0,
-                y: -20,
-                ease: "power2.in",
-                onComplete: () => {
-                    alert("I'll take a look!");
-                    window.location.href = url;
-                }
+                opacity: 0.5,
+                scale: 0.98,
+                ease: 'power2.out'
             });
+
+            try {
+                const response = await fetch(`/resolve?issue=${encodeURIComponent(url)}`);
+                const data = await response.json();
+
+                if (!response.ok) throw new Error(data.error || 'Failed to resolve issue');
+
+                if (data.paymentUrl) {
+                    gsap.to('#issueForm', {
+                        duration: 0.5,
+                        opacity: 0,
+                        y: -20,
+                        ease: 'power2.in',
+                        onComplete: () => {
+                            window.location.href = data.paymentUrl;
+                        }
+                    });
+                }
+            } catch (error) {
+                alert(error.message);
+                
+                // Reset form animation
+                gsap.to('#issueForm', {
+                    duration: 0.5,
+                    opacity: 1,
+                    scale: 1,
+                    ease: 'power2.out'
+                });
+            }
         });
     </script>
 </body>
